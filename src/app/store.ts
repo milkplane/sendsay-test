@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import construction from '../features/construction/constructionSlice';
+import calculation from '../features/calculator/calculatorSlice';
 
 export const store = configureStore({
   reducer: {
     construction,
+    calculation,
   },
 });
 
