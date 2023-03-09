@@ -38,11 +38,14 @@ const Constructor = (props: ConstructorProps) => {
   const takenSlotsNames = useAppSelector(selectTaketSlotNames);
   const slots = takenSlotsNames.map(slotName => {
     return <Slot slotName={slotName}
-      isClickable={!isConstractionMode}/>;
+      isClickable={!isConstractionMode} />;
   });
 
   const draggableSlots = slots.map((slot, index) => {
-    return <DraggableCopy draggableId={props.droppableId + index} index={index} isCloneable={false}>
+    return <DraggableCopy
+      draggableId={props.droppableId + index}
+      index={index} isCloneable={false}
+      isDisable={!isConstractionMode}>
       {slot}
     </DraggableCopy>;
   });
