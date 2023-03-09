@@ -36,7 +36,6 @@ const constructorSlice = createSlice({
     },
     addSlotByIndex(state, action: PayloadAction<SlotMove>) {
       const slotName = state.constructorParts[action.payload.oldPosition];
-      state.takenParts.splice(action.payload.oldPosition, 1);
       state.takenParts.splice(action.payload.newPosition, 0, slotName);
     },
     slotPositionChanged(state, action: PayloadAction<SlotMove>) {
