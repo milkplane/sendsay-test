@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
 import { selectDisplayValue } from './calculatorSlice';
+import { DisableableElement } from './Slot';
 
 const DisplayBorder = styled.div`
   border-radius: 4px;
-  padding: 4px;
   background-color: #ffffff;
 `;
 
@@ -18,7 +18,7 @@ const DisplayContent = styled.p`
   padding: 4px 8px 4px 8px;
 `;
 
-const Display = () => {
+const Display = (props: DisableableElement) => {
   const value = useAppSelector(selectDisplayValue);
 
   return <DisplayBorder>

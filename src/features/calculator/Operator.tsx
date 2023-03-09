@@ -1,12 +1,13 @@
 import { useAppDispatch } from '../../app/hooks';
 import Button from '../../common/components/Button';
 import { operatorAdded } from './calculatorSlice';
+import { DisableableElement } from './Slot';
 
 type OperatorProps = {
   operator: string;
 }
 
-const Operator = (props: OperatorProps) => {
+const Operator = (props: OperatorProps & DisableableElement) => {
   const dispatch = useAppDispatch();
 
   const addOperator = () => {

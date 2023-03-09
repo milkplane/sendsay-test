@@ -1,18 +1,13 @@
-import React from 'react';
+import ConstructionArea from './features/construction/ConstructionArea';
 import ConstructiorSwitch from './features/construction/ConstructorSwitch';
-import Display from './features/calculator/Display';
-import OperatorSlot from './features/calculator/OperatorSlot';
-import DigitChangers from './features/calculator/DigitChangers';
-import EvaluateSlot from './features/calculator/EvaluateSlot';
+
+
 
 function App() {
   return (
     <>
-      <ConstructiorSwitch/>
-      <Display/>
-      <OperatorSlot/>
-      <DigitChangers/>
-      <EvaluateSlot/>
+      <ConstructiorSwitch />
+      <ConstructionArea />
     </>
   );
 }

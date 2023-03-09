@@ -1,20 +1,27 @@
 import { useAppDispatch } from '../../app/hooks';
 import Button from '../../common/components/Button';
 import { digitAdded } from './calculatorSlice';
+import { DisableableElement } from './Slot';
 
 type DigitChangerProps = {
   changer: string;
 }
 
-const DigitChanger = (props: DigitChangerProps) => {
+const DigitChanger = (props: DigitChangerProps & DisableableElement) => {
   const dispatch = useAppDispatch();
 
   const changeNumber = () => {
     dispatch(digitAdded(props.changer));
   };
 
+  const clickHandler = props.isClickable ? 
+    changeNumber :
+    (e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault(); 
+
+
   return <Button color="#ffffff"
-    onClick={changeNumber}
+    onClick={clickHandler}
+    disabled={props.isDisabled}
     hoverBorderColor="#5D5FEF"
     borderColor="#E2E3E5"
     textColor="#000000"

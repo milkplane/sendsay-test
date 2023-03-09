@@ -9,6 +9,13 @@ type CalculatorState = {
   secondNumber: string;
 }
 
+export enum SlotName {
+  Display,
+  Operators,
+  DigitChangers,
+  Evaluation,
+}
+
 const initialState: CalculatorState = {
   operators: ['/', 'x', '-', '+'],
   digitChangers: [

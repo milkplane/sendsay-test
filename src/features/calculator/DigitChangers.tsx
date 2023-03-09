@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
 import { selectDigitChangers } from './calculatorSlice';
 import DigitChanger from './DigitChanger';
+import { DisableableElement } from './Slot';
 
 const ChangersBorder = styled.div`
   display: grid;
@@ -9,17 +10,19 @@ const ChangersBorder = styled.div`
   grid-auto-flow: dense;
   grid-template-rows: repeat(4, minmax(48px, 1fr));
   grid-gap: 8px;
-  padding: 4px;
 
   & .zero {
     grid-column: span 2;
   }
 `;
 
-const DigitChangers = () => {
+const DigitChangers = (props: DisableableElement) => {
   const digitChangers = useAppSelector(selectDigitChangers);
   const Changers = digitChangers.map((changer) => {
-    return <DigitChanger changer={changer}/>;
+    return <DigitChanger key={changer}
+      isClickable={props.isClickable}
+      isDisabled={props.isDisabled}
+      changer={changer} />;
   });
 
   return <ChangersBorder>
