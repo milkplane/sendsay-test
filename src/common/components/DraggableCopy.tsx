@@ -27,6 +27,7 @@ const DraggableCopy = (props: DraggableCopyProps) => {
         ...provided.dragHandleProps,
         style: {
           ...provided.draggableProps.style,
+          opacity: snapshot.isDragging ? 0.7 : 1,
           transform: (snapshot.isDragging || !props.isCloneable)
             ? provided.draggableProps.style?.transform
             : 'translate(0px, 0px)',
