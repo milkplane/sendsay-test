@@ -19,7 +19,8 @@ const Operator = (props: OperatorProps & DisableableElement) => {
     hoverBorderColor="#5D5FEF"
     borderColor="#E2E3E5"
     textColor="#000000"
-    fontWeight={500}>
+    fontWeight={500}
+    isClickable={props.isClickable}>
     {props.operator}
   </Button>;
 };

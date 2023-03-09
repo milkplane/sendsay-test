@@ -14,7 +14,7 @@ const OperatorBorder = styled.div`
 const OperatorSlot = (props: DisableableElement) => {
   const operators = useAppSelector(selectOperators);
   const Operators = operators.map((operator) => {
-    return <Operator key={operator} operator={operator}/>;
+    return <Operator key={operator} operator={operator} isClickable={props.isClickable}/>;
   });
 
   return <OperatorBorder draggable={true}>

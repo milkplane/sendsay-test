@@ -26,7 +26,8 @@ const DigitChanger = (props: DigitChangerProps & DisableableElement) => {
     borderColor="#E2E3E5"
     textColor="#000000"
     fontWeight={500}
-    className={props.changer === '0' ? 'zero' : undefined}>
+    className={props.changer === '0' ? 'zero' : undefined}
+    isClickable={props.isClickable}>
     {props.changer}
   </Button>;
 };

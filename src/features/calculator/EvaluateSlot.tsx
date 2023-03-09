@@ -19,7 +19,8 @@ const EvaluateSlot = (props: DisableableElement) => {
   return <EvaluateSlotBorder>
     <Button color="#5D5FEF"
       onClick={dispatchEvaluate}
-      textColor="#ffffff">
+      textColor="#ffffff"
+      isClickable={props.isClickable}>
       =
     </Button>
   </EvaluateSlotBorder>;
