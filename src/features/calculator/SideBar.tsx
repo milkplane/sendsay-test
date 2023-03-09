@@ -19,7 +19,8 @@ const SideBar = (props: SideBarProps) => {
     return <Slot key={index}
       slotName={slotName}
       isClickable={false}
-      isDisabled={takenSlotNames.includes(slotName) || !isConstructionMode} />;
+      isDisabled={takenSlotNames.includes(slotName) || !isConstructionMode}
+      isHighlighted={!takenSlotNames.includes(slotName)}/>;
   });
 
   const draggableSlots = slots.map((slot, index) => {

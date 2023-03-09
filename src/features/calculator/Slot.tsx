@@ -8,6 +8,7 @@ import OperatorSlot from './OperatorSlot';
 
 type SlotProps = {
   slotName: SlotName;
+  isHighlighted?: boolean;
 }
 
 export interface DisableableElement {
@@ -15,9 +16,18 @@ export interface DisableableElement {
   isClickable?: boolean;
 }
 
+interface HighlightedElement {
+  isHighlighted?: boolean;
+}
+
+type SlotBorderProps = DisableableElement & HighlightedElement;
+
 const SlotBorder = styled.div`
-  opacity: ${(props: DisableableElement) => props.isDisabled ? 0.5 : 1};
-  pointer-events: ${(props: DisableableElement) => props.isDisabled ? 'none' : 'auto'};
+  opacity: ${(props: SlotBorderProps) => props.isDisabled ? 0.5 : 1};
+  pointer-events: ${(props: SlotBorderProps) => props.isDisabled ? 'none' : 'auto'};
+  box-shadow: ${(props: SlotBorderProps) => props.isHighlighted
+    ? '0px 2px 4px rgba(0, 0, 0, 0.06), 0px 4px 6px rgba(0, 0, 0, 0.1);'
+    : 'none'};
   border-radius: 4px;
   padding: 4px;
 `;
@@ -37,7 +47,7 @@ const Slot = React.forwardRef<HTMLDivElement, SlotProps & DisableableElement>((p
 
   Content = React.cloneElement(Content, { isDisabled: props.isDisabled, isClickable: props.isClickable });
 
-  return <SlotBorder {...props} ref={ref}>
+  return <SlotBorder {...props} ref={ref} isHighlighted={props.isHighlighted}>
     {Content}
   </SlotBorder>;
 });
