@@ -27,8 +27,6 @@ const ConstructionArea = () => {
     } else if (source.droppableId === destination.droppableId) {
       dispatch(slotPositionChanged({ oldPosition: source.index, newPosition: destination.index }));
     }
-
-
   };
 
   return <Layout>

@@ -45,7 +45,7 @@ const Constructor = (props: ConstructorProps) => {
     return <DraggableCopy
       draggableId={props.droppableId + index}
       index={index} isCloneable={false}
-      isDisable={!isConstractionMode}>
+      isDraggable={!isConstractionMode}>
       {slot}
     </DraggableCopy>;
   });

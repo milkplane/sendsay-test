@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+type SlotPaddingProps = {
+  isHidden?: boolean;
+}
+
 const SlotPadding = styled.div`
   & > * {
     margin-bottom: 12px;
@@ -10,7 +14,7 @@ const SlotPadding = styled.div`
     margin-bottom: 0;
   }
 
-  opacity: ${(props: {isHidden?: boolean}) => props.isHidden ? 0 : 1};
+  visibility: ${(props: SlotPaddingProps) => props.isHidden ? 'hidden' : 'visable'};
 `;
 
 type SlotListProps = {

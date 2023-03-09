@@ -13,11 +13,11 @@ type DraggableCopyProps = {
   draggableId: string;
   isCloneable: boolean;
   children: React.ReactElement;
-  isDisable?: boolean;
+  isDraggable?: boolean;
 }
 
 const DraggableCopy = (props: DraggableCopyProps) => {
-  if (props.isDisable) return props.children;
+  if (props.isDraggable) return props.children;
 
   return <Draggable draggableId={props.draggableId} index={props.index}>
     {(provided, snapshot) => {

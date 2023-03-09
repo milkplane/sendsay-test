@@ -24,14 +24,14 @@ const SideBar = (props: SideBarProps) => {
 
   const draggableSlots = slots.map((slot, index) => {
     return <DraggableCopy key={index}
-      draggableId={'calculator-parts' + index}
+      draggableId={props.droppableId + index}
       index={index}
       isCloneable={true}>
       {slot}
     </DraggableCopy>;
   });
 
-  return <Droppable droppableId={props.droppableId} isDropDisabled={false}>
+  return <Droppable droppableId={props.droppableId} isDropDisabled={true}>
     {(provided) => {
       return <SlotList isHidden={props.isHidden} ref={provided.innerRef} {...provided.droppableProps}>
         {draggableSlots}
