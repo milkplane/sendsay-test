@@ -23,7 +23,7 @@ const ConstructionArea = () => {
     if (destination.index === source.index && destination.droppableId === source.droppableId) return;
 
     if (destination.droppableId !== source.droppableId && destination.droppableId === constractorId) {
-      dispatch(addSlotByIndex(source.index));
+      dispatch(addSlotByIndex({ oldPosition: source.index, newPosition: destination.index }));
     } else if (source.droppableId === destination.droppableId) {
       dispatch(slotPositionChanged({ oldPosition: source.index, newPosition: destination.index }));
     }
