@@ -71,6 +71,11 @@ const calculatorSlice = createSlice({
       state.expressionValue = result;
       state.operator = action.payload;
       state.secondNumber = '';
+    },
+    calculatorReset(state) {
+      state.expressionValue = initialState.expressionValue;
+      state.operator = initialState.operator;
+      state.secondNumber = initialState.secondNumber;
     }
   }
 });
@@ -83,6 +88,6 @@ export const selectDisplayValue = (state: RootState) => {
 export const selectDigitChangers = (state: RootState) => state.calculation.digitChangers;
 export const selectOperators = (state: RootState) => state.calculation.operators;
 
-export const { digitAdded, operatorAdded } = calculatorSlice.actions;
+export const { digitAdded, operatorAdded, calculatorReset } = calculatorSlice.actions;
 
 export default calculatorSlice.reducer;

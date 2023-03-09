@@ -4,7 +4,7 @@ import { useAppSelector } from '../../app/hooks';
 import DraggableCopy from '../../common/components/DraggableCopy';
 import Slot from '../calculator/Slot';
 import SlotList from '../calculator/SlotList';
-import { selectIsSlotsEmpty, selectTaketSlotNames } from './constructionSlice';
+import { selectIsConstructionMode, selectIsSlotsEmpty, selectTaketSlotNames } from './constructionSlice';
 
 type ExtraConstructorBorderProps = {
   isOverFirstElement: boolean;
@@ -32,10 +32,15 @@ type ConstructorProps = {
 
 const Constructor = (props: ConstructorProps) => {
   const isNoTakenSlots = useAppSelector(selectIsSlotsEmpty);
+  const isConstractionMode = useAppSelector(selectIsConstructionMode);
   const isOverSlotFirstElemnt = false;
 
   const takenSlotsNames = useAppSelector(selectTaketSlotNames);
-  const slots = takenSlotsNames.map(slotName => <Slot slotName={slotName} />);
+  const slots = takenSlotsNames.map(slotName => {
+    return <Slot slotName={slotName}
+      isClickable={!isConstractionMode}/>;
+  });
+
   const draggableSlots = slots.map((slot, index) => {
     return <DraggableCopy draggableId={props.droppableId + index} index={index} isCloneable={false}>
       {slot}
@@ -53,7 +58,7 @@ const Constructor = (props: ConstructorProps) => {
           <SlotList>
             {draggableSlots}
           </SlotList>
-        </ConstructorBorder>;
+        </ConstructorBorder>
         {provided.placeholder}
       </>;
     }}

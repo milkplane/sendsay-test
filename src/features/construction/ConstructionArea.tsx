@@ -1,8 +1,8 @@
 import { DragDropContext, OnDragEndResponder } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import SideBar from '../calculator/SideBar';
-import { addSlotByIndex, slotPositionChanged } from './constructionSlice';
+import { addSlotByIndex, selectIsConstructionMode, slotPositionChanged } from './constructionSlice';
 import Constructor from './Constructor';
 
 const Layout = styled.div`
@@ -16,6 +16,7 @@ const ConstructionArea = () => {
 
   const constractorId = 'constactor-parts';
   const calculatorPartsId = 'calculator-parts';
+  const isConstructionMode = useAppSelector(selectIsConstructionMode);
 
   const handleDragEnd: OnDragEndResponder = ({ destination, source }) => {
     if (!destination) return;
@@ -32,7 +33,7 @@ const ConstructionArea = () => {
 
   return <Layout>
     <DragDropContext onDragEnd={handleDragEnd}>
-      <SideBar droppableId={calculatorPartsId} />
+      <SideBar droppableId={calculatorPartsId} isHidden={!isConstructionMode} />
       <Constructor droppableId={constractorId} />
     </DragDropContext>
   </Layout>;
