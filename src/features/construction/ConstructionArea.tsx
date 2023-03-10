@@ -1,10 +1,9 @@
 import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { createDropHanlder, DropHandler} from '../../common/dragndrop/destinationCheckers';
-import SideBar from '../calculator/SideBar';
-import { slotMovedToConstructor, selectIsConstructionMode, slotPositionChanged } from './constructionSlice';
-import Constructor from './Constructor';
+import { useAppDispatch } from '../../app/hooks';
+import { createDropHanlder, DropHandler } from '../../common/dragndrop/destinationCheckers';
+import { slotMovedToConstructor, slotPositionChanged } from './constructionSlice';
+import DraggableSlotList from './DraggableSlotList';
 
 const Layout = styled.div`
   display: grid;
@@ -15,10 +14,9 @@ const Layout = styled.div`
 
 const ConstructionArea = () => {
   const dispatch = useAppDispatch();
-  const isConstructionMode = useAppSelector(selectIsConstructionMode);
 
-  const constractorId = 'constactor-parts';
   const calculatorPartsId = 'calculator-parts';
+  const constractorId = 'constactor-parts';
 
   const sameDestinationDrop: DropHandler = (move) => {
     dispatch(slotPositionChanged(move));
@@ -32,8 +30,8 @@ const ConstructionArea = () => {
 
   return <Layout>
     <DragDropContext onDragEnd={dropHandler}>
-      <SideBar droppableId={calculatorPartsId} isHidden={!isConstructionMode} />
-      <Constructor droppableId={constractorId} />
+      <DraggableSlotList droppableId={calculatorPartsId} isConstructor={false} />
+      <DraggableSlotList droppableId={constractorId} isConstructor={true} />
     </DragDropContext>
   </Layout>;
 };

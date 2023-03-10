@@ -9,7 +9,7 @@ import OperatorSlot from './OperatorSlot';
 type SlotProps = {
   slotName: SlotName;
   isHighlighted?: boolean;
-  ondblclick?: (slotName: SlotName) => void;
+  doubleClickHandler?: (slotName: SlotName) => void;
 }
 
 export interface DisableableElement {
@@ -35,7 +35,7 @@ const SlotBorder = styled.div`
 
 const Slot = React.forwardRef<HTMLDivElement, SlotProps & DisableableElement>((props, ref) => {
   const doubleClickHandler = () => {
-    props.ondblclick && props.ondblclick(props.slotName);
+    props.doubleClickHandler && props.doubleClickHandler(props.slotName);
   };
 
   let Content = <></>;
