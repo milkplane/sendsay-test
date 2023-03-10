@@ -65,7 +65,6 @@ const Constructor = (props: ConstructorProps) => {
             </SlotList>}
 
         </ConstructorBorder>
-        {provided.placeholder}
       </>;
     }}
   </Droppable>;
