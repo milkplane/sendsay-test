@@ -1,16 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { ArrayMove } from '../../common/array/arrayMove';
 import { SlotName } from '../calculator/calculatorSlice';
 
 type ConstructorState = {
   isConstructionMode: boolean;
   constructorParts: Array<SlotName>;
   takenParts: Array<SlotName>;
-}
-
-type SlotMove = {
-  oldPosition: number;
-  newPosition: number;
 }
 
 const initialState: ConstructorState = {
@@ -29,19 +25,14 @@ const constructorSlice = createSlice({
     toggleConstructionMode(state) {
       state.isConstructionMode = !state.isConstructionMode;
     },
-    addSlot(state, action: PayloadAction<SlotName>) {
-      if (state.takenParts.indexOf(action.payload) !== -1) return;
-
-      state.takenParts.push();
+    slotMovedToConstructor(state, action: PayloadAction<ArrayMove>) {
+      const slotName = state.constructorParts[action.payload.oldIndex];
+      state.takenParts.splice(action.payload.newIndex, 0, slotName);
     },
-    addSlotByIndex(state, action: PayloadAction<SlotMove>) {
-      const slotName = state.constructorParts[action.payload.oldPosition];
-      state.takenParts.splice(action.payload.newPosition, 0, slotName);
-    },
-    slotPositionChanged(state, action: PayloadAction<SlotMove>) {
-      const slotName = state.takenParts[action.payload.oldPosition];
-      state.takenParts.splice(action.payload.oldPosition, 1);
-      state.takenParts.splice(action.payload.newPosition, 0, slotName);
+    slotPositionChanged(state, action: PayloadAction<ArrayMove>) {
+      const slotName = state.takenParts[action.payload.oldIndex];
+      state.takenParts.splice(action.payload.oldIndex, 1);
+      state.takenParts.splice(action.payload.newIndex, 0, slotName);
     },
     removeSlot(state, action: PayloadAction<SlotName>) {
       const index = state.takenParts.indexOf(action.payload);
@@ -53,8 +44,7 @@ const constructorSlice = createSlice({
 export const { 
   setConstructionMode,
   toggleConstructionMode,
-  addSlot,
-  addSlotByIndex,
+  slotMovedToConstructor,
   slotPositionChanged,
   removeSlot } = constructorSlice.actions;
 
