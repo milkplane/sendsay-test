@@ -68,7 +68,7 @@ const DraggableSlotList = forwardRef<HTMLDivElement, DraggableSlotListProps>((pr
     </SlotList>;
 
 
-  return <Droppable droppableId={props.droppableId}>
+  return <Droppable droppableId={props.droppableId} isDropDisabled={!props.isConstructor}>
     {(provided, snapshot) => {
       return <ConstructorBorder
         ref={provided.innerRef}
