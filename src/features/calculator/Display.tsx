@@ -16,6 +16,7 @@ const DisplayContent = styled.p`
   font-size: 36px;
   background-color: #F3F4F6;
   padding: 4px 8px 4px 8px;
+  word-breaK: break-all;
 `;
 
 const Display = (props: DisableableElement) => {
