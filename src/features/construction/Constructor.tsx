@@ -36,6 +36,7 @@ const Constructor = (props: ConstructorProps) => {
   const dispatch = useAppDispatch();
   const isNoTakenSlots = useAppSelector(selectIsSlotsEmpty);
   const isConstractionMode = useAppSelector(selectIsConstructionMode);
+  
   const doubleClickHandler = (slotName: SlotName) => {
     isConstractionMode && dispatch(removeSlot(slotName));
   };
@@ -44,7 +45,7 @@ const Constructor = (props: ConstructorProps) => {
   const slots = takenSlotsNames.map(slotName => {
     return <Slot slotName={slotName}
       isClickable={!isConstractionMode}
-      ondblclick={doubleClickHandler}/>;
+      ondblclick={doubleClickHandler} />;
   });
 
   const draggableSlots = slots.map((slot, index) => {
@@ -56,22 +57,21 @@ const Constructor = (props: ConstructorProps) => {
     </DraggableCopy>;
   });
 
+  const content = isNoTakenSlots
+    ? <DropTooltip />
+    : <SlotList>
+      {draggableSlots}
+    </SlotList>;
+
   return <Droppable droppableId={props.droppableId}>
     {(provided, snapshot) => {
-      return <>
-        <ConstructorBorder
-          isNoContent={isNoTakenSlots}
-          isOverFirstElement={snapshot.isDraggingOver && isNoTakenSlots}
-          {...provided.droppableProps}
-          ref={provided.innerRef}>
-          {isNoTakenSlots
-            ? <DropTooltip />
-            : <SlotList>
-              {draggableSlots}
-            </SlotList>}
-
-        </ConstructorBorder>
-      </>;
+      return <ConstructorBorder
+        isNoContent={isNoTakenSlots}
+        isOverFirstElement={snapshot.isDraggingOver && isNoTakenSlots}
+        {...provided.droppableProps}
+        ref={provided.innerRef}>
+        {content}
+      </ConstructorBorder>;
     }}
   </Droppable>;
 };
