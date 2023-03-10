@@ -9,6 +9,7 @@ import OperatorSlot from './OperatorSlot';
 type SlotProps = {
   slotName: SlotName;
   isHighlighted?: boolean;
+  ondblclick?: (slotName: SlotName) => void;
 }
 
 export interface DisableableElement {
@@ -33,6 +34,10 @@ const SlotBorder = styled.div`
 `;
 
 const Slot = React.forwardRef<HTMLDivElement, SlotProps & DisableableElement>((props, ref) => {
+  const doubleClickHandler = () => {
+    props.ondblclick && props.ondblclick(props.slotName);
+  };
+
   let Content = <></>;
 
   if (props.slotName === SlotName.Display) {
@@ -47,7 +52,7 @@ const Slot = React.forwardRef<HTMLDivElement, SlotProps & DisableableElement>((p
 
   Content = React.cloneElement(Content, { isDisabled: props.isDisabled, isClickable: props.isClickable });
 
-  return <SlotBorder {...props} ref={ref} isHighlighted={props.isHighlighted}>
+  return <SlotBorder onDoubleClick={doubleClickHandler}{...props} ref={ref} isHighlighted={props.isHighlighted}>
     {Content}
   </SlotBorder>;
 });

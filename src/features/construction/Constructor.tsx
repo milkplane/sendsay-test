@@ -1,11 +1,12 @@
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import DraggableCopy from '../../common/components/DraggableCopy';
 import DropTooltip from '../../common/components/DropTooltip';
+import { SlotName } from '../calculator/calculatorSlice';
 import Slot from '../calculator/Slot';
 import SlotList from '../calculator/SlotList';
-import { selectIsConstructionMode, selectIsSlotsEmpty, selectTaketSlotNames } from './constructionSlice';
+import { removeSlot, selectIsConstructionMode, selectIsSlotsEmpty, selectTaketSlotNames } from './constructionSlice';
 
 type ExtraConstructorBorderProps = {
   isOverFirstElement: boolean;
@@ -32,13 +33,19 @@ type ConstructorProps = {
 }
 
 const Constructor = (props: ConstructorProps) => {
+  const dispatch = useAppDispatch();
+  const doubleClickHandler = (slotName: SlotName) => {
+    dispatch(removeSlot(slotName));
+  };
+
   const isNoTakenSlots = useAppSelector(selectIsSlotsEmpty);
   const isConstractionMode = useAppSelector(selectIsConstructionMode);
 
   const takenSlotsNames = useAppSelector(selectTaketSlotNames);
   const slots = takenSlotsNames.map(slotName => {
     return <Slot slotName={slotName}
-      isClickable={!isConstractionMode} />;
+      isClickable={!isConstractionMode}
+      ondblclick={doubleClickHandler}/>;
   });
 
   const draggableSlots = slots.map((slot, index) => {

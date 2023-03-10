@@ -42,6 +42,10 @@ const constructorSlice = createSlice({
       const slotName = state.takenParts[action.payload.oldPosition];
       state.takenParts.splice(action.payload.oldPosition, 1);
       state.takenParts.splice(action.payload.newPosition, 0, slotName);
+    },
+    removeSlot(state, action: PayloadAction<SlotName>) {
+      const index = state.takenParts.indexOf(action.payload);
+      state.takenParts.splice(index, 1);
     }
   }
 });
@@ -51,7 +55,8 @@ export const {
   toggleConstructionMode,
   addSlot,
   addSlotByIndex,
-  slotPositionChanged } = constructorSlice.actions;
+  slotPositionChanged,
+  removeSlot } = constructorSlice.actions;
 
 export const selectIsConstructionMode = (state: RootState) => state.construction.isConstructionMode;
 export const selectIsSlotsEmpty = (state: RootState) => state.construction.takenParts.length === 0;
