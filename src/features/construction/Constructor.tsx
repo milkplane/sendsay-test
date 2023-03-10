@@ -34,12 +34,11 @@ type ConstructorProps = {
 
 const Constructor = (props: ConstructorProps) => {
   const dispatch = useAppDispatch();
-  const doubleClickHandler = (slotName: SlotName) => {
-    dispatch(removeSlot(slotName));
-  };
-
   const isNoTakenSlots = useAppSelector(selectIsSlotsEmpty);
   const isConstractionMode = useAppSelector(selectIsConstructionMode);
+  const doubleClickHandler = (slotName: SlotName) => {
+    isConstractionMode && dispatch(removeSlot(slotName));
+  };
 
   const takenSlotsNames = useAppSelector(selectTaketSlotNames);
   const slots = takenSlotsNames.map(slotName => {
