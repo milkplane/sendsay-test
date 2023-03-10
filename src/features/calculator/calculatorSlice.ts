@@ -34,6 +34,8 @@ const calculatorSlice = createSlice({
   initialState,
   reducers: {
     digitAdded(state, action: PayloadAction<string>) {
+      if (action.payload === ',' && state.secondNumber.includes(',')) return;
+
       if (isNaN(state.expressionValue)) {
         state.expressionValue = 0;
         state.operator = '=';
