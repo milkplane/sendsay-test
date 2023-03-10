@@ -61,7 +61,7 @@ const DraggableSlotList = forwardRef<HTMLDivElement, DraggableSlotListProps>((pr
   });
 
   const isHidden = !props.isConstructor && !isConstructionMode;
-  const content = props.isConstructor && isNoTakenSlots
+  const content = props.isConstructor && isNoTakenSlots && isConstructionMode
     ? <DropTooltip />
     : <SlotList isHidden={isHidden}>
       {draggableSlots}
@@ -74,7 +74,7 @@ const DraggableSlotList = forwardRef<HTMLDivElement, DraggableSlotListProps>((pr
         ref={provided.innerRef}
         {...provided.droppableProps}
         isOverFirstElement={props.isConstructor && snapshot.isDraggingOver}
-        isNoContent={props.isConstructor && isNoTakenSlots}>
+        isNoContent={props.isConstructor && isNoTakenSlots && isConstructionMode}>
         {content}
       </ConstructorBorder>;
     }}
