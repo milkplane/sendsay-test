@@ -14,7 +14,7 @@ type SlotMove = {
 }
 
 const initialState: ConstructorState = {
-  isConstructionMode: false,
+  isConstructionMode: true,
   constructorParts: [SlotName.Display, SlotName.Operators, SlotName.DigitChangers, SlotName.Evaluation],
   takenParts: [],
 };
