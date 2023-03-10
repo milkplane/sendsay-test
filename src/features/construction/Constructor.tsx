@@ -2,6 +2,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
 import DraggableCopy from '../../common/components/DraggableCopy';
+import DropTooltip from '../../common/components/DropTooltip';
 import Slot from '../calculator/Slot';
 import SlotList from '../calculator/SlotList';
 import { selectIsConstructionMode, selectIsSlotsEmpty, selectTaketSlotNames } from './constructionSlice';
@@ -33,7 +34,6 @@ type ConstructorProps = {
 const Constructor = (props: ConstructorProps) => {
   const isNoTakenSlots = useAppSelector(selectIsSlotsEmpty);
   const isConstractionMode = useAppSelector(selectIsConstructionMode);
-  const isOverSlotFirstElemnt = false;
 
   const takenSlotsNames = useAppSelector(selectTaketSlotNames);
   const slots = takenSlotsNames.map(slotName => {
@@ -51,16 +51,19 @@ const Constructor = (props: ConstructorProps) => {
   });
 
   return <Droppable droppableId={props.droppableId}>
-    {(provided) => {
+    {(provided, snapshot) => {
       return <>
         <ConstructorBorder
           isNoContent={isNoTakenSlots}
-          isOverFirstElement={isOverSlotFirstElemnt}
+          isOverFirstElement={snapshot.isDraggingOver && isNoTakenSlots}
           {...provided.droppableProps}
           ref={provided.innerRef}>
-          <SlotList>
-            {draggableSlots}
-          </SlotList>
+          {isNoTakenSlots
+            ? <DropTooltip />
+            : <SlotList>
+              {draggableSlots}
+            </SlotList>}
+
         </ConstructorBorder>
         {provided.placeholder}
       </>;
