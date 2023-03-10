@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
 import { selectDigitChangers } from './calculatorSlice';
 import DigitChanger from './DigitChanger';
-import { DisableableElement } from './Slot';
+import { DisableableElement } from '../construction/Slot';
 
 const ChangersBorder = styled.div`
   display: grid;

@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../app/hooks';
 import Button from '../../common/components/Button';
 import { digitAdded } from './calculatorSlice';
-import { DisableableElement } from './Slot';
+import { DisableableElement } from '../construction/Slot';
 
 type DigitChangerProps = {
   changer: string;

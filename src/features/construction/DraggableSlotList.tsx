@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import DropTooltip from '../../common/components/DropTooltip';
 import { SlotName } from '../calculator/calculatorSlice';
-import SlotList from '../calculator/SlotList';
+import SlotList from './SlotList';
 import { removeSlot, selectIsConstructionMode, selectSlotNames, selectTaketSlotNames } from './constructionSlice';
 import DraggableSlot from './DraggableSlot';
 

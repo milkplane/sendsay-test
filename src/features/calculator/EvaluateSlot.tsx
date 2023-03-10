@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useAppDispatch } from '../../app/hooks';
 import Button from '../../common/components/Button';
 import { operatorAdded } from './calculatorSlice';
-import { DisableableElement } from './Slot';
+import { DisableableElement } from '../construction/Slot';
 
 const EvaluateSlotBorder = styled.div`
   display: grid;

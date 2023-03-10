@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SlotName } from './calculatorSlice';
-import DigitChangers from './DigitChangers';
-import Display from './Display';
-import EvaluateSlot from './EvaluateSlot';
-import OperatorSlot from './OperatorSlot';
+import { SlotName } from '../calculator/calculatorSlice';
+import DigitChangers from '../calculator/DigitChangers';
+import Display from '../calculator/Display';
+import EvaluateSlot from '../calculator/EvaluateSlot';
+import OperatorSlot from '../calculator/OperatorSlot';
 
 type SlotProps = {
   slotName: SlotName;
