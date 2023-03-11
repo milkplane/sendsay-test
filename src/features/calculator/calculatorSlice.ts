@@ -4,6 +4,7 @@ import { RootState } from '../../app/store';
 type CalculatorState = {
   operators: Array<string>;
   digitChangers: Array<string>;
+  limitDigitNubmer: number;
   expressionValue: number;
   operator: string;
   secondNumber: string;
@@ -24,6 +25,7 @@ const initialState: CalculatorState = {
     '1', '2', '3',
     '0', ','
   ],
+  limitDigitNubmer: 7,
   expressionValue: 0,
   operator: '=',
   secondNumber: '',
@@ -34,8 +36,11 @@ const calculatorSlice = createSlice({
   initialState,
   reducers: {
     digitAdded(state, action: PayloadAction<string>) {
-      if (action.payload === ',' && state.secondNumber.includes(',')) return;
+      const isAlreadyhasPoint = state.secondNumber.includes(',');
+      if (action.payload === ',' && isAlreadyhasPoint) return;
       if (action.payload === '0' && state.secondNumber === '0') return;
+      const digitsInNumber = state.secondNumber.length - Number(isAlreadyhasPoint);
+      if (digitsInNumber >= state.limitDigitNubmer) return;
 
       if (isNaN(state.expressionValue)) {
         state.expressionValue = 0;
@@ -86,7 +91,9 @@ const calculatorSlice = createSlice({
 export const selectDisplayValue = (state: RootState) => {
   if (state.calculation.secondNumber) return state.calculation.secondNumber;
   if (isNaN(state.calculation.expressionValue)) return 'NaN';
-  return (state.calculation.expressionValue).toString().replace('.', ',');
+  const shift = 10**state.calculation.limitDigitNubmer;
+  const roundedValue = Math.round(state.calculation.expressionValue * shift) / shift;
+  return roundedValue.toString().replace('.', ',');
 };
 export const selectDigitChangers = (state: RootState) => state.calculation.digitChangers;
 export const selectOperators = (state: RootState) => state.calculation.operators;
