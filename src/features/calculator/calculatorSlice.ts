@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { hasPoint, howManyDigits, roundToStringNumber } from '../../common/numbers/stringNumber';
 
 type CalculatorState = {
   operators: Array<string>;
@@ -36,12 +37,9 @@ const calculatorSlice = createSlice({
   initialState,
   reducers: {
     digitAdded(state, action: PayloadAction<string>) {
-      const isAlreadyhasPoint = state.secondNumber.includes(',');
-      const digitsInNumber = state.secondNumber.length - Number(isAlreadyhasPoint);
-
-      if (action.payload === ',' && isAlreadyhasPoint) return;
+      if (action.payload === ',' && hasPoint(state.secondNumber)) return;
       if (action.payload === '0' && state.secondNumber === '0') return;
-      if (digitsInNumber >= state.limitDigitNubmer) return;
+      if (howManyDigits(state.secondNumber) >= state.limitDigitNubmer) return;
 
       if (isNaN(state.expressionValue)) {
         state.expressionValue = 0;
@@ -91,10 +89,7 @@ const calculatorSlice = createSlice({
 
 export const selectDisplayValue = (state: RootState) => {
   if (state.calculation.secondNumber) return state.calculation.secondNumber;
-  if (isNaN(state.calculation.expressionValue)) return 'NaN';
-  const shift = 10**state.calculation.limitDigitNubmer;
-  const roundedValue = Math.round(state.calculation.expressionValue * shift) / shift;
-  return roundedValue.toString().replace('.', ',');
+  return roundToStringNumber(state.calculation.limitDigitNubmer, state.calculation.expressionValue);
 };
 export const selectDigitChangers = (state: RootState) => state.calculation.digitChangers;
 export const selectOperators = (state: RootState) => state.calculation.operators;
