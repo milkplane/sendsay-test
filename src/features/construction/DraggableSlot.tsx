@@ -1,6 +1,7 @@
+import { DisableableElement } from '../../common/components/Disableable';
 import DraggableCopy from '../../common/components/DraggableCopy';
 import { SlotName } from '../calculator/calculatorSlice';
-import Slot, { DisableableElement } from './Slot';
+import Slot from './Slot';
 
 type ConsturctorSlotProps = {
   slotName: SlotName;

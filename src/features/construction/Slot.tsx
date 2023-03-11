@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DisableableElement } from '../../common/components/Disableable';
 import { SlotName } from '../calculator/calculatorSlice';
 import DigitChangers from '../calculator/DigitChangers';
 import Display from '../calculator/Display';
@@ -10,11 +11,6 @@ type SlotProps = {
   slotName: SlotName;
   isHighlighted?: boolean;
   doubleClickHandler?: (slotName: SlotName) => void;
-}
-
-export interface DisableableElement {
-  isDisabled?: boolean;
-  isClickable?: boolean;
 }
 
 interface HighlightedElement {

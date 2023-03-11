@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
+import { DisableableElement } from '../../common/components/Disableable';
 import { selectOperators } from './calculatorSlice';
 import Operator from './Operator';
-import { DisableableElement } from '../construction/Slot';
+
 
 const OperatorBorder = styled.div`
   display: grid;

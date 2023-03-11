@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
+import { DisableableElement } from '../../common/components/Disableable';
 import { selectDisplayValue } from './calculatorSlice';
-import { DisableableElement } from '../construction/Slot';
 
 const DisplayBorder = styled.div`
   border-radius: 4px;

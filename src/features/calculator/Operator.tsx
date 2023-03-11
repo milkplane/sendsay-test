@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../app/hooks';
 import Button from '../../common/components/Button';
+import { DisableableElement } from '../../common/components/Disableable';
 import { operatorAdded } from './calculatorSlice';
-import { DisableableElement } from '../construction/Slot';
 
 type OperatorProps = {
   operator: string;
