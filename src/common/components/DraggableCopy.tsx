@@ -17,9 +17,7 @@ type DraggableCopyProps = {
 }
 
 const DraggableCopy = (props: DraggableCopyProps) => {
-  if (!props.isDraggable) return props.children;
-
-  return <Draggable draggableId={props.draggableId} index={props.index}>
+  return <Draggable isDragDisabled={!props.isDraggable} draggableId={props.draggableId} index={props.index}>
     {(provided, snapshot) => {
       const contentWithProps = cloneElement(props.children, {
         ref: provided.innerRef,

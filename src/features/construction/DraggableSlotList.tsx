@@ -53,7 +53,8 @@ const DraggableSlotList = forwardRef<HTMLDivElement, DraggableSlotListProps>((pr
       index={index}
       slotName={slotName}
       isClickable={!isConstructionMode && props.isConstructor}
-      isDraggable={isConstructionMode}
+      isDraggable={(props.isConstructor && isConstructionMode) ||
+         (!props.isConstructor && !takenSlotNames.includes(slotName))}
       isClonable={!props.isConstructor}
       isDisabled={!isConstructionMode && !props.isConstructor}
       isHighlighted={!props.isConstructor && !takenSlotNames.includes(slotName)}
