@@ -37,9 +37,10 @@ const calculatorSlice = createSlice({
   reducers: {
     digitAdded(state, action: PayloadAction<string>) {
       const isAlreadyhasPoint = state.secondNumber.includes(',');
+      const digitsInNumber = state.secondNumber.length - Number(isAlreadyhasPoint);
+
       if (action.payload === ',' && isAlreadyhasPoint) return;
       if (action.payload === '0' && state.secondNumber === '0') return;
-      const digitsInNumber = state.secondNumber.length - Number(isAlreadyhasPoint);
       if (digitsInNumber >= state.limitDigitNubmer) return;
 
       if (isNaN(state.expressionValue)) {
