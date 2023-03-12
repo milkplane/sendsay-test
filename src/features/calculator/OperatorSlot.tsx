@@ -18,7 +18,7 @@ const OperatorSlot = (props: DisableableElement) => {
     return <Operator key={operator} operator={operator} isClickable={props.isClickable}/>;
   });
 
-  return <OperatorBorder draggable={true}>
+  return <OperatorBorder>
     {Operators}
   </OperatorBorder>;
 };
