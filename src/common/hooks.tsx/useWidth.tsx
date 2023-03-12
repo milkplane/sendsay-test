@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 export const useWidth = (ref: React.RefObject<HTMLElement>) => {
   const [width, setWidth] = useState<number>(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!ref.current) return;
 
     const computedStyle = getComputedStyle(ref.current);
