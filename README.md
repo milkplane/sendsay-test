@@ -1,2 +1,2 @@
-# Тестовое для sendsay
-ссылка на деплой: https://milkplane.github.io/sendsay-test/
+# Конструктор калькулятора
+Ссылка: https://milkplane.github.io/sendsay-test/
